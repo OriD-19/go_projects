@@ -1,0 +1,38 @@
+<!DOCTYPE html> <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PokeApi Visualization</title>
+</head>
+<body>
+    <h1>PokeAPI</h1>     
+
+    <main>
+        <!-- For each pokemon, render an article -->
+        <article>
+            <p>{{ .Id }}</p>
+
+            <img src="{{ .Sprite.Other.OfficialArtwork.FrontDefault }}" alt="Official artwork for pokemon {{ formatName .Name }}">
+
+            <h2>{{ formatName .Name }}</h2>
+            <h3>Types</h3>
+            <ul>
+            {{ range .Types }}
+            <li>
+                <a href="{{ .Type.Url }}">{{ formatName .Type.Name }}</a>
+            </li>
+            {{ end }}
+            </ul>
+
+            <h3>Moves</h3>
+            {{ range .Moves }}
+            <li>
+                <a href="{{ .Move.Url }}">{{ formatName .Move.Name }}</a>
+            </li>
+            {{ end }}
+        </article>
+    </main>
+
+
+</body>
+</html>

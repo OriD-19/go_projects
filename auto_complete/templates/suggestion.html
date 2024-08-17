@@ -1,0 +1,9 @@
+{{ block "suggestion" . }}
+    {{ range . }}
+    <div>
+        <button onclick="fillSearch(this)">
+            {{ . }}
+        </button>
+    </div>
+    {{ end }}
+{{ end }}

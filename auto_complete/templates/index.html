@@ -1,0 +1,56 @@
+<!DOCTYPE html> <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Contact Manager</title>
+        <link type="text/css" href="./css/style.css" rel="stylesheet">
+        <script src="./scripts/script.js" defer></script>
+        <script src="https://unpkg.com/htmx.org@2.0.1"></script>
+    </head>
+    <body>
+        
+        {{ template "header" }}
+
+        <!-- Insert our little search bar -->
+        {{ template "searchbar" }}
+
+        <div id="suggestions">
+            
+        </div>
+
+        <hr />
+        <h2>Contacts</h2>
+        <main>
+            {{ range . }}
+            <article>
+                <h2>{{ .Name }}</h2>
+                <h3>{{ .Phone }}</h3>
+            </article>
+            {{ end }}
+        </main>
+
+    </body>
+</html>
+
+{{ define "header" }}
+<header style="display: flex; justify-content: space-around; align-items: center;">
+    <h1>Contact Manager</h1>
+    <a href="/createContact">Create new contact</a>
+</header>
+{{ end }}
+
+{{ define "searchbar" }}
+<form method="get" action="/userDetails">
+    <p>
+        <label for="search">Search for a contact</label>
+    </p>
+    <input 
+        hx-target="#suggestions" 
+        hx-trigger="keyup" 
+        hx-post="/getSuggestions" 
+        type="text" 
+        name="search" 
+        id="search">
+    <button type="submit">Search</button>
+</form>
+{{ end }}
